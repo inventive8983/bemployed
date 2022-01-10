@@ -1,4 +1,4 @@
-import {FaShippingFast, FaWineBottle, FaBox, FaWpforms, FaListAlt} from "react-icons/fa";
+import {FaUser, FaBox, FaWpforms, FaListAlt, FaPlus} from "react-icons/fa";
 import { RiHome6Fill } from "react-icons/ri";
 
 const NavigationConfig = [
@@ -9,70 +9,48 @@ const NavigationConfig = [
         path: '/dashboard'
     },
     {   
-        key: "order",
-        title: "Orders",
+        key: "job",
+        title: "Jobs",
         icon: FaListAlt,
-        path: '/orders'
+        path: '/jobs',
+        cta: {
+            icon: <FaPlus/>,
+            caption: "New Job",
+            route: '/app/jobs/create'
+        }
     },
+
     {   
-        key: "shipments",
-        title: "Shipments",
-        icon: FaShippingFast,
-        path: '/shipments'
+        key: "candidates",
+        title: "Candidates",
+        icon: FaUser,
+        path: '/candidates'
+    },
+    {
+        key:"billing-2",
+        title: "Billing",
+        icon: FaWpforms,
+        path: '/billing/registration-fees',
     },
     {
         key:"billing",
         title: "Billing",
         icon: FaWpforms,
-        path: '/billing/shipping-charges',
+        path: '/billing/registration-fees',
         hidden: true
     },
     {
-        key:"billing",
+        key:"billing-2",
         title: "Billing",
         icon: FaWpforms,
-        path: '/billing/invoices',
+        path: '/billing/providing-charges',
         hidden: true
     },
     {
-        key:"billing",
+        key:"billing-3",
         title: "Billing",
         icon: FaWpforms,
-        path: '/billing/inventory-logs',
-        hidden: true
-    },
-    {
-        key:"billing",
-        title: "Billing",
-        icon: FaWpforms,
-        path: '/billing/wallet-logs',
-        hidden: true
-    },
-    {
-        key:"billing",
-        title: "Billing",
-        icon: FaWpforms,
-        path: '/billing/cod-remittance'
-    },
-    {
-        key:"products",
-        title: "Products",
-        icon: FaWineBottle,
-        path: '/products',
-        hidden: true
-    },
-    {
-        key:"inventory",
-        title: "Dropstocks Inventory",
-        icon: FaBox,
-        path: '/dropstocks-inventory',
-        hidden: true
-    },
-    {
-        key:"inventory",
-        title: "Inventory",
-        icon: FaBox,
-        path: '/inventory',
+        path: '/billing/salary-commisions',
         hidden: true
     },
     {
@@ -81,14 +59,7 @@ const NavigationConfig = [
         icon: FaBox,
         path: '/settings',
         hidden: true
-    },
-    {
-        key:"support",
-        title: "Support",
-        icon: FaBox,
-        path: '/support',
-        hidden: true
-    },
+    }
 ]
 
 

@@ -12,6 +12,7 @@ import {
     MenuItem,
     MenuDivider,
     useColorMode,
+    Button,
   } from "@chakra-ui/react"
 import Sidebar from '../components/layout-components/sidebar'
 import AppViews from '../views/apps'
@@ -19,16 +20,28 @@ import PageHeader from '../components/layout-components/pageHeader'
 import NavigationConfig from '../configs/navigation'
 import { FaUser } from 'react-icons/fa'
 import useWindowWidth from '../scripts/width'
+import { Link } from 'react-router-dom'
+
 
 function AppLayout() {
 
-    const [title, setTitle] = useState("Orders")
+    const [title, setTitle] = useState("Jobs")
+    const [cta, setCTA] = useState({})
 
     const location = useLocation()
 
     useEffect(() => {
-        const currentPage = NavigationConfig.filter(page => location.pathname === "/app" + page.path)
-        if(currentPage.length) setTitle(currentPage[0].title)
+        const currentPage = NavigationConfig.filter(page => location.pathname.includes(page.path))
+        if(currentPage.length){
+            setTitle(currentPage[0].title);
+            if(currentPage[0].cta){
+                setCTA(currentPage[0].cta)
+            }
+            else{
+                setCTA({})
+            }
+            document.title = currentPage[0].title + " | Bemployed Admin - ";
+        } 
         else setTitle("Not Found")
     }, [location])
 
@@ -36,7 +49,6 @@ function AppLayout() {
     const { colorMode, toggleColorMode } = useColorMode()
 
     useEffect(() => {
-        console.log(colorMode);
     }, [colorMode])
 
     return (
@@ -46,8 +58,8 @@ function AppLayout() {
                     <Sidebar/>
             </Box>}
             <Box pl={["0px","0px","0px","280px"]} width="100%">
-                <PageHeader title={title} extras={<Flex>
-                    {width > 992 && <>
+                <PageHeader title={title} extras={<Flex alignItems="center">
+                    {/* {width > 992 && <>
                         <Stat px={8} py={2} borderLeftWidth={1}>
                             <StatLabel>My Earnings</StatLabel>
                             <StatNumber>Rs.15,300.00</StatNumber>
@@ -56,10 +68,15 @@ function AppLayout() {
                             <StatLabel>Shipping Wallet</StatLabel>
                             <StatNumber>Rs.4,380.00</StatNumber>
                         </Stat>
-                    </>}
+                    </>} */}
+                    {cta.caption && <Link to={`${cta.route}`}>
+                        <Button leftIcon={cta.icon} colorScheme="purple" mr={4}>
+                            {cta.caption}
+                        </Button>
+                    </Link>}
                     <Menu>
-                        <MenuButton borderLeftWidth={1} m={0} p={0} _hover={{background: "#88888811"}}>
-                            <Center cursor="pointer" px={4}>
+                        <MenuButton width="56px"  m={0} mr={4} p={1} rounded="50%" _hover={{background: "#88888811"}}>
+                            <Center cursor="pointer">
                                 <Center p={3} bgGradient={"linear-gradient(-45deg, rgba(33,23,212,1) 0%, rgba(126,147,228,1) 100%)"} color="white" rounded="50%">
                                     <FaUser></FaUser>
                                 </Center>

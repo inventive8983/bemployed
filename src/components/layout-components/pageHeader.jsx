@@ -12,10 +12,10 @@ function PageHeader(props) {
     const width = useWindowWidth()    
 
     return (
-        <Flex width="100%" minHeight="73px" maxHeight="76px" position="-webkit-sticky" pos="sticky" top={0} bg={useColorModeValue("white", "gray.900")} zIndex="sticky" borderBottomWidth={1} alignItems="center" justifyContent="space-between">
+        <Flex width="100%" minHeight="73px" maxHeight="76px" position="-webkit-sticky" pos="sticky" top={0} bg={useColorModeValue("white", "gray.900")} zIndex="sticky" alignItems="center" justifyContent="space-between">
             <Flex alignItems="center" py={4} px={2}>
                 {props.back ? <Link to={props.back}><Button variant="ghost" mr={2} ><FaArrowLeft></FaArrowLeft></Button></Link> : (width < 992 && <MobileMenu></MobileMenu>)}
-                <Heading size="md">{props.title}</Heading>
+                <Heading ml={2} size="md">{props.title}</Heading>
             </Flex>
             {props.extras}
         </Flex>
